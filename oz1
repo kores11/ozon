@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ok2</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .redirect-message {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .instruction-message {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        function openInExternalBrowser(url) {
+            var userAgent = navigator.userAgent.toLowerCase();
+            if (userAgent.indexOf('android') !== -1) {
+                window.open('https://' + url + '#Intent;scheme=http;package=com.android.chrome;end');
+            } else if (userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipad') !== -1) {
+                window.open('https://' + url, '_blank');
+            } else {
+                window.open('https://' + url, '_blank');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var countdown = 3; // Таймер 3 секунды
+            var countdownElement = document.getElementById('countdown');
+            
+            function updateCountdown() {
+                if (countdown > 0) {
+                    countdownElement.textContent = 'Переход через ' + countdown + ' сек.';
+                    countdown--;
+                    setTimeout(updateCountdown, 1000);
+                } else {
+                    openInExternalBrowser('btc7.pro');
+                }
+            }
+            
+            updateCountdown();
+
+            var continueButton = document.getElementById('continueButton');
+            continueButton.addEventListener('click', function() {
+                openInExternalBrowser('btc7.pro');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="redirect-message" id="countdown">Переход через 3 сек.</div>
+    <div class="instruction-message">Если перехода не произошло, нажмите на кнопку "Продолжить".</div>
+    <div class="button-container">
+        <button id="continueButton">Продолжить</button>
+    </div>
+</body>
+</html>
